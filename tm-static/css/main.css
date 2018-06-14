@@ -1,9 +1,9 @@
 @keyframes shake {
-	from { transform: rotateY(0deg); }
-	25% { transform: rotateY(10deg); }
-	50% { transform: rotateY(-10deg); }
-	75% { transform: rotateY(10deg); }
-	to { transform: rotateY(0deg); }
+	from { transform: scale(1); }
+	25% { transform: scale(0.98); }
+	50% { transform: scale(1.01); }
+	75% { transform: scale(0.99); }
+	to { transform: scale(1); }
 }
 
 body {
@@ -12,18 +12,71 @@ body {
 	padding: 0;
 	background-color: #3d385a;
 	color: #fff;
+	display: grid;
+	grid-template-rows: 28px 1fr 28px;
+	height: 100vh;
 }
 
+.header {
+	background-color: #4b476b;
+}
+	.header .container {
+		width: 100%;
+		max-width: 1200px;
+		margin: auto;
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: center;
+		align-items: center;
+	}
+		.header .container .title {
+			width: 17%;
+			min-width: 200px;
+			color: #ffffff12;
+			text-transform: uppercase;
+			font-size: 1.2em;
+			font-weight: bold;
+		}
+		.header .container .days-heading {
+			width: 80%;
+			margin: auto;
+			display: flex;
+			flex-wrap: nowrap;
+			justify-content: center;
+			align-items: center;
+		}
+			.header .container .days-heading .wrapper {
+				display: flex;
+				margin: 0 5px;
+			}
+				.header .container .wrapper .day-head {
+					width: 115px;
+					height: 28px;
+					padding: 0 10px;
+					margin: 0 5px;
+					line-height: 28px;
+					font-size: 0.8em;
+					text-align: center;
+				}
 
 .section {
+	height: calc(100vh - 28px - 28px);
 	perspective: 2000px;
+	overflow-y: auto;
+	background: #4b476b; /* Old browsers */
+	background: -moz-linear-gradient(top, #4b476b 0%, #3d385a 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #4b476b 0%,#3d385a 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #4b476b 0%,#3d385a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b476b', endColorstr='#3d385a',GradientType=0 ); /* IE6-9 */
+}
+
+.footer {
+	background-color: #363250;
 }
 
 .week-container {
 	width: 100%;
 	max-width: 1200px;
-	height: 100%;
-	min-height: 100vh;
 	margin: auto;
 	display: flex;
 	flex-wrap: nowrap;
@@ -32,14 +85,22 @@ body {
 }
 
 .week {
-	background-color: #ffffff0a;
+	transition: background-color 0.5s;
+	background: -moz-linear-gradient(top, rgba(35,34,51,0) 0%, rgba(35,34,51,0.1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, rgba(35,34,51,0) 0%,rgba(35,34,51,0.1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, rgba(35,34,51,0) 0%,rgba(35,34,51,0.1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00232233', endColorstr='#1a232233',GradientType=0 ); /* IE6-9 */
 }
+	.week:hover {
+		background-color: #ffffff12;
+	}
 
 .week-title {
 	width: 17%;
 	min-width: 200px;
 }
 	.week-title h3 {
+		margin-top: 5px;
 		margin-bottom: 10px;
 		text-transform: uppercase;
 	}
@@ -58,18 +119,61 @@ body {
 	align-items: center;
 }
 
-.card {
-	width: 135px;
-	height: 100px;
+.week-wrapper {
+	display: flex;
+	margin: 0 5px;
+}
+
+.day {
+	display: flex;
+	justify-content: center;
+	align-items: stretch;
+	width: 115px;
+	min-height: 100px;
+	padding: 10px;
+	margin: 10px 5px;
 	border-radius: 5px;
 	background-color: #D6E3F3;
 	color: #131022;
 	transition: transform 1s;
-	transform: rotateY(0deg);
+	-webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.35);
+	-moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.35);
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.35);
 }
-	.card:nth-child(odd) {
-		margin: 10px;
+	.day.today {
+		background-color: #fc9867;
 	}
-	.card:hover {
+	.day:hover {
 		animation: shake 0.3s ease-out;
 	}
+
+.day-wrapper {
+	width: 100%;
+	padding: 0 10px;
+}
+	.day-wrapper h4 {
+		margin-top: 0.3em;
+		margin-bottom: 0;
+		text-align: center;
+	}
+	.day-wrapper p.date {
+		margin-top: 0.5em;
+		color: #13102270;
+		font-size: 0.6em;
+		text-align: center;
+	}
+	.day-wrapper p.goal {
+		color: #131022ab;
+		font-size: 0.8em;
+		text-align: center;
+	}
+		.day-wrapper p.goal span {
+			font-weight: bold;
+		}
+		.day-wrapper p.result input {
+			width: 100%;
+			text-align: center;
+			background-color: #edf3fb;
+			border: none;
+			border-radius: 2px;
+		}
